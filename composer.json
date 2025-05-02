@@ -1,0 +1,34 @@
+{
+  "name": "quasarstream/mixin",
+  "type": "library",
+  "description": "This library builds upon common PHP classes and traits shared across the WebRTC ecosystem.",
+  "keywords": [
+    "webrtc"
+  ],
+  "homepage": "https://www.quasarstream.com/webrtc",
+  "license": "BSD 3-Clause",
+  "authors": [
+    {
+      "name": "Amin Yazdanpanah",
+      "email": "github@aminyazdanpanah.com"
+    },
+    {
+      "name": "Sana Moniri",
+      "email": "s.mo@quasarstream.com"
+    },
+    {
+      "name": "Quasar Stream Community",
+      "homepage": "https://quasarstream.com/teams"
+    }
+  ],
+  "require": {
+    "php": "^8.4",
+    "evenement/evenement": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Webrtc\\Mixin\\": "src"
+    }
+  },
+  "minimum-stability": "dev"
+}
