@@ -1,7 +1,7 @@
 {
-    "name": "quasarstream/mixin",
+    "name": "danog/php-rtc-mixin",
     "type": "library",
-    "description": "This library builds upon common PHP classes and traits shared across the WebRTC ecosystem.",
+    "description": "This library builds upon common PHP classes and traits shared across the WebRTC ecosystem. Fork with FFI made optional and a pure-PHP DTLS/SRTP stack, maintained for MadelineProto.",
     "keywords": [
         "webrtc"
     ],
@@ -30,5 +30,8 @@
             "Webrtc\\Mixin\\": "src"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "replace": {
+        "quasarstream/mixin": "self.version"
+    }
 }
