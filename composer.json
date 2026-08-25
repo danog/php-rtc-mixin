@@ -1,7 +1,7 @@
 {
     "name": "danog/php-rtc-mixin",
     "type": "library",
-    "description": "This library builds upon common PHP classes and traits shared across the WebRTC ecosystem. Fork with FFI made optional and a pure-PHP DTLS/SRTP stack, maintained for MadelineProto.",
+    "description": "Common PHP classes and traits for WebRTC components. MadelineProto's PHP 8.2+ fork is a Composer-compatible foundation of the modular danog/php-rtc stack.",
     "keywords": [
         "webrtc"
     ],
