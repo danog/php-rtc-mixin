@@ -30,8 +30,5 @@
             "Webrtc\\Mixin\\": "src"
         }
     },
-    "minimum-stability": "dev",
-    "replace": {
-        "quasarstream/mixin": "self.version"
-    }
+    "minimum-stability": "dev"
 }

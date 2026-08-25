@@ -4,9 +4,9 @@ This library provides common PHP classes and traits also found in other WebRTC l
 
 ## About this fork
 
-This is the `danog/php-rtc-mixin` PHP 8.2+ fork used by MadelineProto. It is published separately from upstream and declares that it replaces `quasarstream/mixin`.
+This is the `danog/php-rtc-mixin` PHP 8.2+ fork used by MadelineProto. It is published under the `danog/php-rtc-mixin` Composer package name.
 
-The forked stack keeps the upstream `quasarstream/*` dependency constraints for compatibility. Each `danog/php-rtc-*` package replaces its upstream counterpart, so consumers select the complete maintained stack by requiring the corresponding danog packages together.
+All internal Composer dependencies use their `danog/php-rtc-*` package names directly, so installing a component selects the maintained danog packages throughout the dependency graph.
 ## Requirements
 
 - PHP 8.2 or higher
