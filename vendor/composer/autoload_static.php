@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit6807b9e0f98eb78ecbd8f438f85200ce
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'Webrtc\\Mixin\\' => 13,
         ),
-        'E' => 
+        'E' =>
         array (
             'Evenement\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Webrtc\\Mixin\\' => 
+        'Webrtc\\Mixin\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Evenement\\' => 
+        'Evenement\\' =>
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
         ),
