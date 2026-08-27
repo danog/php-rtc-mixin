@@ -39,7 +39,7 @@ trait EventForwarder
     {
         $callbacks = [];
         foreach ($events as $event => $method) {
-            $callbacks[] = $callback = fn(...$args) => $this->{$method}(...$args);
+            $callbacks[] = $callback = $this->{$method}(...);
             $source->on($event, $callback);
         }
 
