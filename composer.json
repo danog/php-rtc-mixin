@@ -33,5 +33,19 @@
             "Webrtc\\Mixin\\": "src"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": true,
+            "forward-command": true
+        }
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "*"
+    }
 }
