@@ -30,6 +30,7 @@ final class SerializableState
                 $key = $class->getName() . "\0" . $property->getName();
                 $name = $property->getName();
                 if (array_key_exists($name, $replacements)) {
+                    /** @psalm-suppress MixedAssignment */
                     $state[$key] = $replacements[$name];
                     continue;
                 }
@@ -37,6 +38,7 @@ final class SerializableState
                     $state[$key] = ['__uninitialized' => true];
                     continue;
                 }
+                /** @psalm-suppress MixedAssignment */
                 $state[$key] = $property->getValue($object);
             }
             $parent = $class->getParentClass();
@@ -51,14 +53,26 @@ final class SerializableState
      */
     public static function import(object $object, array $state): void
     {
+        /**
+         * @var mixed $value
+         */
         foreach ($state as $key => $value) {
-            if (!is_string($key) || !str_contains($key, "\0")) {
+            if (!str_contains($key, "\0")) {
                 continue;
             }
-            [$className, $name] = explode("\0", $key, 2);
+            $parts = explode("\0", $key, 2);
+            if (count($parts) !== 2) {
+                continue;
+            }
+            $className = $parts[0];
+            $name = $parts[1];
             if (is_array($value) && ($value['__uninitialized'] ?? false) === true) {
                 continue;
             }
+            if (!class_exists($className) && !trait_exists($className)) {
+                continue;
+            }
+            /** @var class-string $className */
             $property = new ReflectionProperty($className, $name);
             $property->setValue($object, $value);
         }

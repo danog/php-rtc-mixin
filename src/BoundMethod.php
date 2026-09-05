@@ -21,9 +21,16 @@ final class BoundMethod
     public function __invoke(mixed ...$args): mixed
     {
         if ($this->object instanceof EventForwarderHost) {
-            return $this->object->dispatchBoundEvent($this->method, $args);
+            /** @var list<mixed> $list */
+            $list = array_values($args);
+
+            return $this->object->dispatchBoundEvent($this->method, $list);
         }
 
-        return $this->object->{$this->method}(...$args);
+        $object = $this->object;
+        $method = $this->method;
+
+        /** @psalm-suppress MixedMethodCall */
+        return $object->{$method}(...$args);
     }
 }
