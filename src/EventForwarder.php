@@ -25,6 +25,16 @@ use Evenement\EventEmitterInterface;
 trait EventForwarder
 {
     /**
+     * Invoke a (possibly private) event handler. Public so {@see BoundMethod} stays serializable.
+     *
+     * @param list<mixed> $args
+     */
+    public function dispatchBoundEvent(string $method, array $args): mixed
+    {
+        return $this->{$method}(...$args);
+    }
+
+    /**
      * Forwards specific events from the given source to corresponding methods on the current object.
      *
      * Each event is mapped to a method name, and when the event is emitted from the source,
@@ -39,7 +49,7 @@ trait EventForwarder
     {
         $callbacks = [];
         foreach ($events as $event => $method) {
-            $callbacks[] = $callback = $this->{$method}(...);
+            $callbacks[] = $callback = new BoundMethod($this, $method);
             $source->on($event, $callback);
         }
 
@@ -60,9 +70,7 @@ trait EventForwarder
     private function forwardEvents(EventEmitterInterface $source, array $events): void
     {
         foreach ($events as $event) {
-            $source->on($event, function () use ($event) {
-                $this->emit($event, \func_get_args());
-            });
+            $source->on($event, new EventReemitter($this, $event));
         }
     }
 }
