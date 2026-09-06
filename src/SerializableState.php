@@ -56,13 +56,13 @@ final class SerializableState
      * objects are part of the graph and serialize by shared reference — and rebuilds the WeakMap on
      * the far side with {@see self::listToWeakMap()}.
      *
-     * @param \WeakMap<object, mixed> $map
-     * @return list<object>
+     * @template T of object
+     * @param \WeakMap<T, null> $map
+     * @return list<T>
      */
     public static function weakMapToList(\WeakMap $map): array
     {
         $list = [];
-        /** @var object $key */
         foreach ($map as $key => $_) {
             $list[] = $key;
         }
@@ -73,12 +73,13 @@ final class SerializableState
     /**
      * Rebuild a listener WeakMap (key => null) from a list produced by {@see self::weakMapToList()}.
      *
-     * @param list<object> $list
-     * @return \WeakMap<object, null>
+     * @template T of object
+     * @param list<T> $list
+     * @return \WeakMap<T, null>
      */
     public static function listToWeakMap(array $list): \WeakMap
     {
-        /** @var \WeakMap<object, null> $map */
+        /** @var \WeakMap<T, null> $map */
         $map = new \WeakMap();
         foreach ($list as $object) {
             $map[$object] = null;
