@@ -49,6 +49,45 @@ final class SerializableState
     }
 
     /**
+     * Snapshot the keys of a listener WeakMap into a plain list for serialization.
+     *
+     * A WeakMap cannot itself be serialized, so an emitter that keeps its listeners in one (weakly,
+     * so a collected listener drops out on its own) exports the live keys as a list — the listener
+     * objects are part of the graph and serialize by shared reference — and rebuilds the WeakMap on
+     * the far side with {@see self::listToWeakMap()}.
+     *
+     * @param \WeakMap<object, mixed> $map
+     * @return list<object>
+     */
+    public static function weakMapToList(\WeakMap $map): array
+    {
+        $list = [];
+        /** @var object $key */
+        foreach ($map as $key => $_) {
+            $list[] = $key;
+        }
+
+        return $list;
+    }
+
+    /**
+     * Rebuild a listener WeakMap (key => null) from a list produced by {@see self::weakMapToList()}.
+     *
+     * @param list<object> $list
+     * @return \WeakMap<object, null>
+     */
+    public static function listToWeakMap(array $list): \WeakMap
+    {
+        /** @var \WeakMap<object, null> $map */
+        $map = new \WeakMap();
+        foreach ($list as $object) {
+            $map[$object] = null;
+        }
+
+        return $map;
+    }
+
+    /**
      * @param array<string, mixed> $state
      */
     public static function import(object $object, array $state): void
