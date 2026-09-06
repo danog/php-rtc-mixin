@@ -25,8 +25,13 @@ use Evenement\EventEmitterInterface;
 trait EventForwarder
 {
     /**
-     * Invoke a (possibly private) event handler. Public so {@see BoundMethod} stays serializable.
+     * Invoke a (possibly private) event handler.
      *
+     * Public only so {@see BoundMethod} — a serializable listener that Evenement invokes from
+     * outside this object's scope — can hand the event back in, from where the private handler is
+     * reachable. Not part of the public API; call sites other than BoundMethod are a mistake.
+     *
+     * @internal
      * @param list<mixed> $args
      */
     public function dispatchBoundEvent(string $method, array $args): mixed
